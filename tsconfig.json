@@ -23,5 +23,13 @@
     "experimentalDecorators": true
   },
   // Folder for your code
-  "include": ["./src/**/*"]
+  "include": [
+    "./src/**/*",
+    "old/state.ts",
+    "old/score.ts",
+    "old/scene.ts",
+    "old/rock.ts",
+    "old/player.ts",
+    "old/gameover.ts"
+  ]
 }

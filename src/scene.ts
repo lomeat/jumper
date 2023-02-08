@@ -1,99 +1,53 @@
 import { Container, Sprite, Texture, Ticker } from "pixi.js";
 
-import { Player } from "./player";
-import { Rock } from "./rock";
-import { Score } from "./score";
-import { GameOver } from "./gameover";
-
-import { checkCollision } from "./utils";
+import { generateHexColor } from "./utils";
 
 type Props = {
-  screenSizes: [Screen["width"], Screen["height"]];
+  screenWidth: number;
+  screenHeight: number;
+  background?: number;
 };
 
-export function Scene({ screenSizes }: Props) {
-  // Init
+export class Scene {
+  private background?: number;
+  private width: number;
+  private height: number;
 
-  const container = new Container();
-  const [screenWidth, screenHeight] = screenSizes;
+  private container = new Container();
+  private backgroundSprite = new Sprite(Texture.WHITE);
 
-  const {
-    player,
-    playerIsDead,
-    playerInteract,
-    initPlayer,
-    setPlayerVelocity,
-  } = Player({
-    screenSizes,
-    velocity: 10,
-    direction: "right",
-  });
-  const { rock, rockFall, setRockVelocity } = Rock({ screenSizes });
-  const { score, incScore, resetScore } = Score();
-  const { gameOver } = GameOver({ restartClick: restartGame });
+  constructor({ screenHeight, screenWidth, background }: Props) {
+    this.height = screenHeight;
+    this.width = screenWidth;
 
-  const background = new Sprite(Texture.WHITE);
-  background.width = screenWidth;
-  background.height = screenHeight;
-  background.interactive = true;
-  background.on("pointertap", playerInteract);
+    this.backgroundSprite.width = this.width;
+    this.backgroundSprite.height = this.height;
 
-  // Funcs
-
-  function isRockFell(delta) {
-    rockFall(delta);
-
-    if (rock.y >= screenSizes[1] + 100) {
-      rock.y = -100;
-      return true;
+    if (background) {
+      this.background = background;
+      this.backgroundSprite.tint = this.background;
     }
 
-    return false;
+    this.backgroundSprite.interactive = true;
+    this.backgroundSprite.on("pointertap", () =>
+      // this.changeBackground(0xff0000)
+      this.randomBackground()
+    );
+
+    this.container.addChild(this.backgroundSprite);
   }
 
-  function scoring(delta) {
-    if (isRockFell(delta)) {
-      incScore();
-    }
-
-    if (checkCollision(player, rock)) {
-      playerIsDead();
-      setRockVelocity(0);
-      container.addChild(gameOver);
-    }
+  changeBackground(newBackground: number) {
+    this.background = newBackground;
+    this.backgroundSprite.tint = this.background;
   }
 
-  function restartGame() {
-    init();
-    setRockVelocity(10);
-    initPlayer();
-    resetScore(0);
-    container.removeChild(gameOver);
+  randomBackground() {
+    this.background = parseInt(generateHexColor());
+    this.backgroundSprite.tint = this.background;
   }
 
-  function init() {
-    player.x = -player.width;
-    player.y = screenHeight - 100;
-
-    rock.x = 100;
-    rock.y = -100;
+  getContainer() {
+    return this.container;
   }
-
-  // Body
-
-  init();
-
-  score.x = screenSizes[0] - score.width * 2 - 10;
-
-  gameOver.x = screenWidth / 2 - gameOver.width / 2;
-  gameOver.y = screenHeight / 2 - gameOver.height / 2;
-
-  Ticker.shared.add(scoring);
-
-  container.addChild(background);
-  container.addChild(player);
-  container.addChild(rock);
-  container.addChild(score);
-
-  return { scene: container };
 }

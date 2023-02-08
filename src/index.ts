@@ -16,13 +16,15 @@ const app = new Application({
   view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
   resolution: window.devicePixelRatio || 1,
   autoDensity: true,
-  backgroundColor: 0xffffff,
+  backgroundColor: 0x000000,
   width: 800,
   height: 600,
 });
 
-const { scene } = Scene({
-  screenSizes: [app.screen.width, app.screen.height],
+const scene = new Scene({
+  screenHeight: app.screen.height,
+  screenWidth: app.screen.width,
 });
+const sceneContainer = scene.getContainer();
 
-app.stage.addChild(scene);
+app.stage.addChild(sceneContainer);

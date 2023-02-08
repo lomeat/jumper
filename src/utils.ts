@@ -8,3 +8,10 @@ export function checkCollision(first, second) {
     a.y < b.y + b.height
   );
 }
+
+export function generateHexColor(): string {
+  const maxValue = 0xffffff;
+  const randomNumber = Math.floor(Math.random() * maxValue).toString(16);
+
+  return `0x${randomNumber}`;
+}
