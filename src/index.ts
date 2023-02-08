@@ -1,14 +1,4 @@
-import {
-  Application,
-  Sprite,
-  Container,
-  TextStyle,
-  Text,
-  BitmapText,
-  BitmapFont,
-  ParticleContainer,
-  Texture,
-} from "pixi.js";
+import { Application } from "pixi.js";
 
 import { Scene } from "./scene";
 
@@ -25,6 +15,6 @@ const scene = new Scene({
   screenHeight: app.screen.height,
   screenWidth: app.screen.width,
 });
-const sceneContainer = scene.getContainer();
+const sceneContainer = scene.container;
 
 app.stage.addChild(sceneContainer);

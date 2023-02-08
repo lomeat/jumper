@@ -1,6 +1,7 @@
 import { Container, Sprite, Texture, Ticker } from "pixi.js";
 
 import { generateHexColor } from "./utils";
+import { Player } from "./player";
 
 type Props = {
   screenWidth: number;
@@ -13,7 +14,7 @@ export class Scene {
   private width: number;
   private height: number;
 
-  private container = new Container();
+  private sceneContainer = new Container();
   private backgroundSprite = new Sprite(Texture.WHITE);
 
   constructor({ screenHeight, screenWidth, background }: Props) {
@@ -34,7 +35,10 @@ export class Scene {
       this.randomBackground()
     );
 
-    this.container.addChild(this.backgroundSprite);
+    const player = new Player();
+
+    this.sceneContainer.addChild(this.backgroundSprite);
+    this.sceneContainer.addChild(player);
   }
 
   changeBackground(newBackground: number) {
@@ -47,7 +51,11 @@ export class Scene {
     this.backgroundSprite.tint = this.background;
   }
 
-  getContainer() {
-    return this.container;
+  get container() {
+    return this.sceneContainer;
+  }
+
+  get sprite() {
+    return this.backgroundSprite;
   }
 }
