@@ -9,9 +9,10 @@ export function checkCollision(first, second) {
   );
 }
 
-export function generateHexColor(): string {
+export function generateHexColor(): number {
   const maxValue = 0xffffff;
   const randomNumber = Math.floor(Math.random() * maxValue).toString(16);
+  const hex = `0x${randomNumber}`;
 
-  return `0x${randomNumber}`;
+  return parseInt(hex);
 }
