@@ -1,14 +1,19 @@
 import { Sprite, Texture } from "pixi.js";
 
-import { generateHexColor } from "./utils";
+import { generateHexColor, useState } from "./utils";
 
 type Props = {
   color?: number;
 };
 
+type Direction = "left" | "right";
+
 export function Player(props?: Props) {
   const sprite = new Sprite(Texture.WHITE);
   sprite.tint = props?.color ?? generateHexColor();
+
+  const [speed, setSpeed] = useState<number>(0);
+  const [direction, setDirection] = useState<Direction>("left");
 
   sprite.width = 100;
   sprite.height = 200;
@@ -28,7 +33,7 @@ export function Player(props?: Props) {
     }
   }
 
-  const newProps = {};
+  const newProps = { setSpeed, setDirection };
 
   return Object.assign(sprite, newProps);
 }
