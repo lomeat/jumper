@@ -20,5 +20,9 @@ export function Scene({ sizes }: Props) {
 
   container.addChild(background);
 
-  return Object.assign(container, { callOutside });
+  const newProps = {
+    callOutside,
+  };
+
+  return Object.assign(container, newProps);
 }
