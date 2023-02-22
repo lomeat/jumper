@@ -16,3 +16,5 @@ export function generateHexColor(): number {
 
   return parseInt(hex);
 }
+
+function 
