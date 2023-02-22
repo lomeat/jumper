@@ -30,6 +30,7 @@
     "old/scene.ts",
     "old/rock.ts",
     "old/player.ts",
-    "old/gameover.ts"
+    "old/gameover.ts",
+    "old-class/player.ts"
   ]
 }
