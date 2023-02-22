@@ -1,4 +1,4 @@
-import { Container, DisplayObject, Sprite, Texture } from "pixi.js";
+import { Container, Sprite, Texture } from "pixi.js";
 
 import { generateHexColor } from "./utils";
 
@@ -13,13 +13,6 @@ export function Scene({ sizes }: Props) {
   const background = new Sprite(Texture.WHITE);
   background.width = width;
   background.height = height;
-  background.interactive = true;
-  background.on("pointertap", randomBackground);
-
-  function randomBackground() {
-    const color = parseInt(generateHexColor());
-    background.tint = color;
-  }
 
   function callOutside() {
     console.log("outside");
