@@ -1,4 +1,5 @@
 import { Sprite, Texture } from "pixi.js";
+import React from "react";
 
 import { generateHexColor, useState } from "./utils";
 
@@ -12,7 +13,8 @@ export function Player(props?: Props) {
   const sprite = new Sprite(Texture.WHITE);
   sprite.tint = props?.color ?? generateHexColor();
 
-  const [speed, setSpeed] = useState<number>(0);
+  // const [speed, setSpeed] = useState<number>(0);
+  const [speed, setSpeed] = React.useState<number>(0);
   const [direction, setDirection] = useState<Direction>("left");
 
   sprite.width = 100;
