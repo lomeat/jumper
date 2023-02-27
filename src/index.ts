@@ -1,3 +1,7 @@
+// TODO: Make player sprite from tileset
+// TODO: Change player sprite by direction
+// TODO: Animate player's movements
+
 import { Application } from "pixi.js";
 
 import { Scene } from "./scene";
