@@ -1,5 +1,3 @@
-import { Ticker } from "pixi.js";
-
 export function checkCollision(first, second) {
   const a = first.getBounds();
   const b = second.getBounds();
@@ -17,14 +15,4 @@ export function generateHexColor(): number {
   const hex = `0x${randomNumber}`;
 
   return parseInt(hex);
-}
-
-export function useState<T>(value: T): [T, (value: T) => void] {
-  const state = { value };
-
-  function setState(value: T) {
-    state.value = value;
-  }
-
-  return [state.value, setState];
 }
