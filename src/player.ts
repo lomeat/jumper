@@ -2,10 +2,10 @@ import { Application, Sprite, Texture, Ticker } from "pixi.js";
 
 import { generateHexColor } from "./utils";
 import { KeyboardController } from "./keyboard-controller";
+import * as Model from "./model";
+import { gameState } from "./state";
 
 type Props = {
-  color?: number;
-  speed?: number;
   sizes?: [number, number];
 };
 
@@ -16,11 +16,7 @@ export function Player(props?: Props) {
 
   const sprite = new Sprite(Texture.WHITE);
 
-  const state = {
-    speed: props?.speed ?? 5,
-    color: props?.color ?? generateHexColor(),
-    isAlive: true,
-  };
+  const state: Model.Player = { ...gameState.player };
 
   sprite.width = props?.sizes?.[0] ?? 100;
   sprite.height = props?.sizes?.[1] ?? 200;

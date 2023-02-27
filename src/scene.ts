@@ -20,7 +20,7 @@ export function Scene({ sizes }: Props) {
 
   // [main]
 
-  const player = Player({ speed: 10, sizes: [80, 120] });
+  const player = Player({ sizes: [80, 120] });
 
   container.addChild(player);
 
