@@ -9,8 +9,8 @@ const app = new Application({
   resolution: window.devicePixelRatio || 1,
   autoDensity: true,
   backgroundColor: 0x000000,
-  width: 800,
-  height: 600,
+  width: 1000,
+  height: 800,
 });
 
 const scene = Scene({ sizes: [app.screen.width, app.screen.height] });
