@@ -5,6 +5,8 @@ import { KeyboardController } from "./keyboard-controller";
 
 type Props = {
   color?: number;
+  speed?: number;
+  sizes?: [number, number];
 };
 
 type Direction = "left" | "right" | "up" | "down";
@@ -15,18 +17,19 @@ export function Player(props?: Props) {
   const sprite = new Sprite(Texture.WHITE);
 
   const state = {
-    speed: 1,
+    speed: props?.speed ?? 5,
     color: props?.color ?? generateHexColor(),
+    isAlive: true,
   };
 
-  sprite.width = 100;
-  sprite.height = 200;
+  sprite.width = props?.sizes?.[0] ?? 100;
+  sprite.height = props?.sizes?.[1] ?? 200;
   sprite.x = 200;
   sprite.y = 200;
   sprite.tint = state.color;
   sprite.interactive = true;
 
-  const Movement = {
+  const movement = {
     left: KeyboardController({
       key: "a",
       action: (dt) => move(dt, "left"),
@@ -66,16 +69,26 @@ export function Player(props?: Props) {
     }
   }
 
+  function checkAlive() {
+    if (!state.isAlive) {
+      removeControls();
+    }
+  }
+
   function setSpeed(newSpeed) {
     state.speed = newSpeed;
   }
 
   function removeControls() {
-    Movement.left.unsubscribe();
-    Movement.right.unsubscribe();
-    Movement.up.unsubscribe();
-    Movement.down.unsubscribe();
+    movement.left.unsubscribe();
+    movement.right.unsubscribe();
+    movement.up.unsubscribe();
+    movement.down.unsubscribe();
   }
+
+  // [output]
+
+  Ticker.shared.add(checkAlive);
 
   const newProps = { move, setSpeed, removeControls };
 
