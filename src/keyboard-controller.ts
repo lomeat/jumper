@@ -7,8 +7,6 @@ type KeyboardState = {
 
 type KeyboardProps = {
   key: string;
-  onPress?: () => void;
-  onRelease?: () => void;
   action: (dt) => void;
 };
 
