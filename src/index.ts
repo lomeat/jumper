@@ -13,6 +13,8 @@ const app = new Application({
   height: 800,
 });
 
+// [render]
+
 const scene = Scene({ sizes: [app.screen.width, app.screen.height] });
 
 app.stage.addChild(scene);

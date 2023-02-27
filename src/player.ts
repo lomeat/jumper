@@ -1,4 +1,4 @@
-import { Application, Sprite, StateSystem, Texture, Ticker } from "pixi.js";
+import { Sprite, Texture, Ticker } from "pixi.js";
 
 import { KeyboardController } from "./keyboard-controller";
 import * as Model from "./model";
@@ -12,10 +12,9 @@ type Props = {
 export function Player(props?: Props) {
   // [init]
 
-  const sprite = new Sprite(Texture.WHITE);
-
   const state: Model.Player.State = gameState.player;
 
+  const sprite = Sprite.from(Texture.WHITE);
   sprite.width = props?.sizes?.[0] ?? 100;
   sprite.height = props?.sizes?.[1] ?? 200;
   sprite.x = 200;
@@ -43,10 +42,16 @@ export function Player(props?: Props) {
     sprite[EAxis[direction]] += dt * state.speed * EPlayerDirections[direction];
   }
 
-  function checkAlive() {
-    if (!state.isAlive) {
-      removeMovementListeners();
-    }
+  function kill() {
+    state.isAlive = false;
+    state.speed = 0;
+    setColor(0x000000);
+    removeMovementListeners();
+  }
+
+  function setColor(color: number) {
+    state.color = color;
+    sprite.tint = color;
   }
 
   function setSpeed(newSpeed) {
@@ -62,9 +67,7 @@ export function Player(props?: Props) {
 
   // [output]
 
-  Ticker.shared.add(checkAlive);
-
-  const newProps = { move, setSpeed, removeMovementListeners };
+  const newProps = { move, setSpeed, removeMovementListeners, kill, setColor };
 
   return Object.assign(sprite, newProps);
 }

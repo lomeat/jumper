@@ -7,6 +7,8 @@ type Props = {
 };
 
 export function Scene({ sizes }: Props) {
+  // [init]
+
   const container = new Container();
   const [width, height] = sizes;
 
@@ -22,9 +24,13 @@ export function Scene({ sizes }: Props) {
 
   const player = Player({ sizes: [80, 120] });
 
+  setInterval(() => {
+    player.kill();
+  }, 5000);
+
   container.addChild(player);
 
-  // End
+  // [output]
 
   const newProps = {};
 
