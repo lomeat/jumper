@@ -1,6 +1,16 @@
+// --- What should do
+
+// 1st iteration
 // TODO: Make player sprite from tileset
 // TODO: Change player sprite by direction
 // TODO: Animate player's movements
+
+// 2+ iterations
+// TODO: Add background tiles with grass
+// TODO: Add parallax camera when moving
+// TODO: Add objects on the 'map'
+
+// ---
 
 import { Application, settings } from "pixi.js";
 

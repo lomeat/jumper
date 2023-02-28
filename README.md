@@ -1,8 +1,24 @@
+### What was done
+
+- **Controls**. Use W/A/S/D to move.
+- **State**. Click on player to change his color
+- **UI**. Buttons to kill/alive the player
+
+### Architecture
+
+- **State**. Initial state and game state that updating in real time.
+- **Player**. Best example of "how to create game entities". `Player()` creates new instance of `Sprite()` and merge it with new additional methods (`changeColor, setSpeed, ...`). It updates sprite and it's props in real time with subscribes and watchers.
+- **Keyboard**. It realizes keyboard handlers for checking when key is downed/released to accurately handling callbacks/actions.
+- **Model**. Full typed model-based system.
+
 ### Todos
 
-- **History**. Store all app states at one place to restore any state at any time. It also provides opporunity to set different timelines. Easy to debug.
-- **Classes**. Reacreate all game instances with classes with private static methods and public methods. Easy to use `player.setVelocity` instead of `setPlayerVelocity`. Also you can create every new independent instance of player.
-- **Rocks**. Different amount of fallen rocks at random place.
-- **Texture**. Change the textures of player, rock, background
-- **Sounds**. Add simple sounds for app's life.
-- **GameOver Scene**. It means to show some animation after the player hit the rock.
+- 1st iteration
+- TODO: Make player sprite from tileset
+- TODO: Change player sprite by direction
+- TODO: Animate player's movements
+
+- 2+ iterations
+- TODO: Add background tiles with grass
+- TODO: Add parallax camera when moving
+- TODO: Add objects on the 'map'
