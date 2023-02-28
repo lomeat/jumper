@@ -38,7 +38,8 @@ export function Player(props?: Props) {
   // [methods]
 
   function move(dt, direction: Model.Player.Direction) {
-    // Update sprite 'x' or 'y' position
+    // Update sprite position
+    // Determines 'x' or 'y' by Axis enum
     // Direction's enum returns '1' or '-1'
     state.position[EAxis[direction]] +=
       dt * state.speed * EPlayerDirections[direction];
