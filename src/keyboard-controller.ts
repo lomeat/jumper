@@ -41,8 +41,12 @@ export function KeyboardController(props: KeyboardProps) {
     window.removeEventListener("keyup", handleUp);
   }
 
-  window.addEventListener("keydown", handleDown, false);
-  window.addEventListener("keyup", handleUp, false);
+  function subscribe() {
+    window.addEventListener("keydown", handleDown, false);
+    window.addEventListener("keyup", handleUp, false);
+  }
 
-  return { ...state, unsubscribe };
+  subscribe();
+
+  return { ...state, unsubscribe, subscribe };
 }

@@ -16,7 +16,9 @@ const controls: Model.Controls.State = {
   },
 };
 
+export const initState: Model.GameState = { player, controls };
+
 export const gameState: Model.GameState = {
-  player,
-  controls,
+  player: { ...initState.player },
+  controls: { ...initState.controls },
 };

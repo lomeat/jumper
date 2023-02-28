@@ -2,7 +2,7 @@ import { Sprite, Texture, Ticker } from "pixi.js";
 
 import { KeyboardController } from "./keyboard-controller";
 import * as Model from "./model";
-import { gameState } from "./state";
+import { gameState, initState } from "./state";
 import { EPlayerDirections, EAxis } from "./constants";
 
 type Props = {
@@ -42,16 +42,30 @@ export function Player(props?: Props) {
     sprite[EAxis[direction]] += dt * state.speed * EPlayerDirections[direction];
   }
 
+  function watchState() {
+    if (!state.isAlive) {
+      setSpeed(0);
+      setColor(0x000000);
+    } else {
+      setSpeed(initState.player.speed);
+      setColor(initState.player.color);
+    }
+
+    sprite.tint = state.color;
+  }
+
   function kill() {
     state.isAlive = false;
-    state.speed = 0;
-    setColor(0x000000);
     removeMovementListeners();
+  }
+
+  function alive() {
+    state.isAlive = true;
+    addMovementListeners();
   }
 
   function setColor(color: number) {
     state.color = color;
-    sprite.tint = color;
   }
 
   function setSpeed(newSpeed) {
@@ -65,9 +79,18 @@ export function Player(props?: Props) {
     movement.down.unsubscribe();
   }
 
+  function addMovementListeners() {
+    movement.left.subscribe();
+    movement.right.subscribe();
+    movement.up.subscribe();
+    movement.down.subscribe();
+  }
+
   // [output]
 
-  const newProps = { move, setSpeed, removeMovementListeners, kill, setColor };
+  Ticker.shared.add(watchState);
+
+  const newProps = { move, setSpeed, kill, alive, setColor };
 
   return Object.assign(sprite, newProps);
 }
