@@ -2,7 +2,6 @@
 
 // 0-iteration
 // * TODO: Make Color Palette
-// TODO: Make UI scene to control button's disabled state by player's action/state
 // TODO: Observer sub to act with player and change button's color at one place
 // TODO: Observer handlers (action-types)
 
