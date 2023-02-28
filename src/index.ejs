@@ -14,13 +14,19 @@
 			padding: 0;
 			height: 100%;
 			overflow: hidden;
+      font-family: sans;
 		}
+
+    #description {
+      width: 600;
+      margin: 10px auto;
+    }
 
 		#pixi-content {
       display: flex;
       justify-content: center;
       /* align-items: center; */
-      padding: 100px 0 0 0;
+      /* padding: 100px 0 0 0; */
 			background: #fff;
 			width: 100%;
 			height: 100%;
@@ -29,13 +35,24 @@
     #pixi-canvas {
       border: 2px solid black;
     }
+
+    p {
+      margin: 6px 0;
+      padding: 0;
+    }
 	</style>
 
 </head>
 
 <body>
 	<noscript>Please enable JavaScript in your web browser to view this page.</noscript>
-	<div id="pixi-content"><canvas id="pixi-canvas" /></div>
+  <div id="description">
+    <p>* Use <strong>W/A/S/D</strong> to move</p>
+    <p>* Buttons are kill or alive the player</p>
+  </div>
+	<div id="pixi-content">
+    <canvas id="pixi-canvas" />
+  </div>
 </body>
 
 </html>
