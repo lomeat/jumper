@@ -3,6 +3,7 @@ export namespace Player {
     color: number;
     speed: number;
     isAlive: boolean;
+    position: [number, number];
   };
 
   export type Direction = "left" | "right" | "up" | "down";

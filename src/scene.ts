@@ -23,7 +23,10 @@ export function Scene({ sizes }: Props) {
 
   // [main]
 
-  const player = Player({ sizes: [80, 120] });
+  const player = Player({
+    sizes: [80, 120],
+    position: [width / 2, height / 2],
+  });
 
   const killButton = Button({
     position: [width - 220, 20],

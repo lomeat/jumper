@@ -6,8 +6,8 @@ export enum EPlayerDirections {
 }
 
 export enum EAxis {
-  left = "x",
-  right = "x",
-  up = "y",
-  down = "y",
+  left = 0,
+  right = 0,
+  up = 1,
+  down = 1,
 }

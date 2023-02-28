@@ -5,6 +5,7 @@ const player: Model.Player.State = {
   speed: 5,
   color: generateHexColor(),
   isAlive: true,
+  position: [100, 100],
 };
 
 const controls: Model.Controls.State = {
