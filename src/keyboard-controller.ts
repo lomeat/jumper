@@ -39,6 +39,7 @@ export function KeyboardController(props: KeyboardProps) {
   function unsubscribe() {
     window.removeEventListener("keydown", handleDown);
     window.removeEventListener("keyup", handleUp);
+    Ticker.shared.remove(props.action);
   }
 
   function subscribe() {
