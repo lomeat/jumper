@@ -2,11 +2,13 @@
 // TODO: Change player sprite by direction
 // TODO: Animate player's movements
 
-import { Application } from "pixi.js";
+import { Application, settings } from "pixi.js";
 
 import { Scene } from "./scene";
 
 // [init]
+
+settings.RESOLUTION = 1;
 
 const app = new Application({
   view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
