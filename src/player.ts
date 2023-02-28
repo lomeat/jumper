@@ -4,6 +4,7 @@ import { KeyboardController } from "./keyboard-controller";
 import * as Model from "./model";
 import { gameState, initState } from "./state";
 import { EPlayerDirections, EAxis } from "./constants";
+import { generateHexColor } from "./utils";
 
 type Props = {
   sizes?: [number, number];
@@ -21,6 +22,7 @@ export function Player(props?: Props) {
   sprite.tint = state.color;
   sprite.interactive = true;
   sprite.anchor.set(0.5);
+  sprite.on("pointertap", changeColor);
 
   const movement = Object.entries(gameState.controls.movement).reduce(
     (acc, [key, value]) => ({
@@ -30,7 +32,6 @@ export function Player(props?: Props) {
         action: (dt) => move(dt, key as Model.Player.Direction),
       }),
     }),
-    // In my opinion, there is unsafe 'as'
     {} as Model.Player.Movement
   );
 
@@ -48,26 +49,24 @@ export function Player(props?: Props) {
   }
 
   function watchState() {
-    if (!state.isAlive) {
-      setSpeed(0);
-      setColor(0x000000);
-    } else {
-      setSpeed(initState.player.speed);
-      setColor(initState.player.color);
+    if (state.color !== sprite.tint) {
+      sprite.tint = state.color;
     }
-
-    sprite.tint = state.color;
 
     [sprite.x, sprite.y] = state.position;
   }
 
   function kill() {
     state.isAlive = false;
+    setSpeed(0);
+    setColor(0x000000);
     removeMovementListeners();
   }
 
   function alive() {
     state.isAlive = true;
+    setSpeed(initState.player.speed);
+    setColor(initState.player.color);
     setPosition(props?.position ?? initState.player.position);
     addMovementListeners();
   }
@@ -94,13 +93,17 @@ export function Player(props?: Props) {
     movement.down.subscribe();
   }
 
+  function changeColor() {
+    setColor(generateHexColor());
+  }
+
   // [output]
 
   setPosition(props?.position ?? initState.player.position);
 
   Ticker.shared.add(watchState);
 
-  const newProps = { move, setSpeed, kill, alive, setColor };
+  const newProps = { move, setSpeed, kill, alive, setColor, changeColor };
 
   return Object.assign(sprite, newProps);
 }
