@@ -32,13 +32,13 @@ export function Scene({ sizes }: Props) {
     position: [width - 220, 20],
     color: "red",
     action: player.kill,
-    title: "kill",
+    title: "Kill",
   });
   const aliveButton = Button({
     position: [width - 220, 90],
     color: "green",
     action: player.alive,
-    title: "reset",
+    title: "Alive",
   });
 
   // [output]
