@@ -1,5 +1,8 @@
 // --- What should do
 
+// 0-iteration
+// TODO: Make Color Palette
+
 // 1st iteration
 // TODO: Make player sprite from tileset
 // TODO: Change player sprite by direction
