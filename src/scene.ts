@@ -1,8 +1,7 @@
 import { Container, Sprite, Texture } from "pixi.js";
 
 import { Player } from "./player";
-import { Button } from "./button";
-import { ColorPalette } from "./color-palette";
+import { UIPlayerButtons } from "./ui/ui-player-buttons";
 
 type Props = {
   sizes: [number, number];
@@ -29,27 +28,17 @@ export function Scene({ sizes }: Props) {
     position: [width / 2, height / 2],
   });
 
-  const killButton = Button({
-    position: [width - 220, 20],
-    color: "red",
-    action: player.kill,
-    title: "Kill",
-  });
-  const aliveButton = Button({
-    position: [width - 220, 90],
-    color: "green",
-    action: player.alive,
-    title: "Alive",
-  });
-
-  const colorPalette = ColorPalette({
-    action: player.changeColor,
-    position: [width - 220, 200],
+  const uiPlayerButtons = UIPlayerButtons({
+    width: 240,
+    padding: 20,
+    position: [width - 240, 0],
+    player,
   });
 
   // [output]
 
-  container.addChild(player, killButton, aliveButton, colorPalette);
+  container.addChild(player);
+  container.addChild(uiPlayerButtons);
 
   const newProps = {};
 

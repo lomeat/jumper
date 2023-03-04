@@ -6,9 +6,18 @@ import { gameState, initState } from "./state";
 import { EPlayerDirections, EAxis, EColors } from "./constants";
 import { generateHexColor } from "./utils";
 
-type Props = {
+export type Props = {
   sizes?: [number, number];
   position?: [number, number];
+};
+
+export type PlayerInstance = Sprite & {
+  move: (dt: any, direction: Model.Player.Direction) => void;
+  setSpeed: (newSpeed: any) => void;
+  kill: () => void;
+  alive: () => void;
+  setColor: (color: number) => void;
+  changeColor: (color?: string) => void;
 };
 
 export function Player(props?: Props) {

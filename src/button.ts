@@ -9,7 +9,7 @@ import {
 
 import { EColors } from "./constants";
 
-type Props = {
+export type Props = {
   color: keyof typeof EColors;
   position: [number, number];
   action: () => void;
