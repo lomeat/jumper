@@ -24,6 +24,7 @@ export function Player(props?: Props) {
   // [init]
 
   const state: Model.Player.State = gameState.player;
+  const prevState: Model.Player.State = { ...gameState.player };
 
   const sprite = Sprite.from(Texture.WHITE);
   sprite.width = props?.sizes?.[0] ?? 100;
@@ -69,6 +70,7 @@ export function Player(props?: Props) {
   function kill() {
     state.isAlive = false;
     setSpeed(0);
+    prevState.color = state.color;
     setColor(0x000000);
     removeMovementListeners();
   }
@@ -76,7 +78,7 @@ export function Player(props?: Props) {
   function alive() {
     state.isAlive = true;
     setSpeed(initState.player.speed);
-    setColor(initState.player.color);
+    setColor(prevState.color);
     setPosition(props?.position ?? initState.player.position);
     addMovementListeners();
   }
@@ -104,7 +106,9 @@ export function Player(props?: Props) {
   }
 
   function changeColor(color?: string) {
-    setColor(EColors[color ?? "black"] ?? generateHexColor());
+    const newColor = color ? EColors[color] : generateHexColor();
+    setColor(newColor);
+    prevState.color = newColor;
   }
 
   // [output]
