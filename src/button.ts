@@ -13,15 +13,26 @@ type Props = {
   color: keyof typeof EColors;
   position: [number, number];
   action: () => void;
-  title: string;
+  title?: string;
   isDisable?: boolean;
+  sizes?: [number, number];
+  fontSize?: number;
 };
 
-export function Button({ color, position, action, title, isDisable }: Props) {
+export function Button({
+  color,
+  position,
+  action,
+  title,
+  isDisable = false,
+  sizes,
+  fontSize,
+}: Props) {
   // [init]
 
   const state = {
-    isDisable: isDisable ?? false,
+    isDisable,
+    sizes: sizes ?? [200, 50],
   };
 
   const container = new Container();
@@ -31,18 +42,17 @@ export function Button({ color, position, action, title, isDisable }: Props) {
   const sprite = Sprite.from(Texture.WHITE);
   sprite.tint = EColors[color];
   sprite.interactive = true;
-  sprite.width = 200;
-  sprite.height = 50;
+  [sprite.width, sprite.height] = state.sizes;
   sprite.on("pointertap", (e) => handleAction(e));
 
   // Button's text
   BitmapFont.from("arial", {
     fill: "#fff",
     fontFamily: "Arial",
-    fontSize: 32,
   });
-  const text = new BitmapText(title, {
+  const text = new BitmapText(title ?? "", {
     fontName: "arial",
+    fontSize: fontSize ?? 32,
   });
   [text.x, text.y] = [10, 4];
 
@@ -77,6 +87,3 @@ export function Button({ color, position, action, title, isDisable }: Props) {
 
   return Object.assign(container, newProps);
 }
-
-// 1. button (player action) -> button disable, player action
-// 2. button (player action, disable) -> button active, player action

@@ -2,6 +2,7 @@
 
 // 0-iteration
 // * TODO: Make Color Palette
+// TODO: Change player's color by color buttons palette
 // TODO: Observer sub to act with player and change button's color at one place
 // TODO: Observer handlers (action-types)
 
@@ -39,3 +40,5 @@ const app = new Application({
 const scene = Scene({ sizes: [app.screen.width, app.screen.height] });
 
 app.stage.addChild(scene);
+
+// ------

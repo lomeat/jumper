@@ -3,7 +3,7 @@ import { Sprite, Texture, Ticker } from "pixi.js";
 import { KeyboardController } from "./keyboard-controller";
 import * as Model from "./model";
 import { gameState, initState } from "./state";
-import { EPlayerDirections, EAxis } from "./constants";
+import { EPlayerDirections, EAxis, EColors } from "./constants";
 import { generateHexColor } from "./utils";
 
 type Props = {
@@ -22,7 +22,7 @@ export function Player(props?: Props) {
   sprite.tint = state.color;
   sprite.interactive = true;
   sprite.anchor.set(0.5);
-  sprite.on("pointertap", changeColor);
+  sprite.on("pointertap", (e) => changeColor());
 
   const movement = Object.entries(gameState.controls.movement).reduce(
     (acc, [key, value]) => ({
@@ -94,8 +94,8 @@ export function Player(props?: Props) {
     movement.down.subscribe();
   }
 
-  function changeColor() {
-    setColor(generateHexColor());
+  function changeColor(color?: string) {
+    setColor(EColors[color ?? "black"] ?? generateHexColor());
   }
 
   // [output]
