@@ -2,7 +2,9 @@
 
 // 0-iteration
 // * TODO: Make Color Palette
-// TODO: Change player's color by color buttons palette
+// * TODO: Change player's color by color buttons palette
+// TODO: Make responsive UI for different resoluion
+
 // TODO: Observer sub to act with player and change button's color at one place
 // TODO: Observer handlers (action-types)
 
